@@ -61,10 +61,7 @@ void reading_data(t_data *str)
 {
     char *line;
     int i;
-    int k;
-    int j;
 
-    k = 0;
     line = NULL;
     get_next_line(0, &line);
     if (line[0] == "#" && line[1] != '#')
@@ -73,47 +70,49 @@ void reading_data(t_data *str)
     while (get_next_line(0, &line))
     {
         if (line[0] == "#" && line[1] != '#')
-            /* should be ignored */
+            get_next_line(0, &line);
         if (ft_strequ(line, "##start"))
         {
             get_next_line(0, &line);
-            i = 0;
-            while(line[i])
-            {
+            i = -1;
+            while(line[++i])
                 str->start_room[i] = line[i];
-                i++;
-            }
         }
         if (ft_strequ(line, "##end"))
         {
             get_next_line(0, &line);
-            i = 0;
-            while(line[i])
-            {
+            i = -1;
+            while(line[++i])
                 str->end_room[i] = line[i];
-                i++;
-            }
         }
         if (line[0] != "#")
-        {
-            i = 1;
-            while (line[i])
-            {
-                if ((line[i] > '0' || line[i] < '9' || line[i] = '-') && line[i] != ' ')
-                    i++;
-                else
-                    break ;
-            }
-            j = 0;
-            if (line[i] == '\0')
-            {
-                i = 0;
-                while (line[i])
-                    str->rooms_connections[k][j++] = line[i++];
-                k++;
-            }
-        }
+            reading_data_for_room_connections(str);
     }
 }
 
+void reading_data_for_room_connections(t_data *str)
+{
+    char *line;
+    int i;
+    int k;
+    int j;
+
+    k = 0;
+    i = 0;
+    while (line[i])
+    {
+        if (line[i] != ' ' && line[i] != '\t')
+            i++;
+        else
+            break ;
+    }
+    j = 0;
+    if (line[i] == '\0')
+    {
+        i = 0;
+        while (line[i])
+            str->rooms_connections[k][j++] = line[i++];
+        k++;
+    }
+}
 
