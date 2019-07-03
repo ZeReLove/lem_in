@@ -10,14 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-    typedef struct s_reading_data
-    {
-        int amount_of_ants;
-        char *start_room;
-        char *end_room;
-        char **rooms_connections;
-
-    }              t_data;
+#include "lem_in.h"
 
 void checking_data(t_data *str)
 {
