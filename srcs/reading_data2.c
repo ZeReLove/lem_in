@@ -52,49 +52,42 @@ void	room_connections(t_room *room, char *line)
 	r.neigb = make_neighb_list(room, line);
 }
 
-void	sorting_rooms(t_room *room)
+static int	partition(t_room *room, int low, int high)
 {
+	t_list pivot;
 	int i;
 	int j;
-	int res;
-	char *tmp;
 
-	i = 0;
-	j = 1;
-	while (j != room_nb)
+	i = (low - 1);
+	pivot = room[high];
+	j = low;
+	while (j <= high - 1)
 	{
-		res = ft_strcmp(room->name[i], room->name[j])
-		if (res > 0)
+		if (ft_strcmp(room[j]->name, room[pivot]->name) <= 0) //???
 		{
-			tmp = ft_strdup(room->name[j]);
-			room->name[j] = ft_strdup(room->name[i]);
-			room->name[i] = ft_strdup(tmp);
+			i++;
+			ft_uniswap(&room[i], &room[j], t_room *room);
 		}
-		i++;
 		j++;
 	}
-	if (!(is_sorted(room)))
-		sorting_rooms(room);
-	else
-		return ;
+	ft_uniswap(&room[i + 1], &room[high], t_room *room);
+	return (i + 1);
 }
 
-int is_sorted(t_room *room)
+void sorting_rooms(t_room *room)
 {
-	int i;
+	int low;
+	int high;
+	int pi;
 
-	i = 0;
-	while (i < room_nb - 1)
+	low = 0;
+	high = room_nb;
+	if (low < high)
 	{
-		if (ft_strcmp(room->name[i], room->name[i + 1]) < 0)
-			i++;
-		else
-			return (0);
+		pi = partition(room, low, high);
+		quick_sort(room, low, pi - 1);
+		quick_sort(room, pi + 1, high);
 	}
-	if (i == room_nb - 1)
-		return (1);
-	else
-		return (0);
 }
 
 t_room	*find_room(char *buff, t_room *room)
@@ -171,7 +164,7 @@ t_list    *make_neighb_list(t_room *rooms, char *line)
 {
     int i;
     char *tmp;
-	char *save_pointer;
+	int	j;
     t_list *neighb;
 
     i = 0;
@@ -180,19 +173,14 @@ t_list    *make_neighb_list(t_room *rooms, char *line)
     i++;
     tmp = ft_strdup(*line);
     neighb = (t_list*)malloc(sizeof(t_list));
-	if (flag == 1)
-    	neighb->neighbour = find_room(save_pointer, rooms);
-	else
-		neighb->neighbour = find_room(tmp, rooms);
-	save_pointer = ft_strdup(tmp);
-	if (flag == 1)
-		neighb->next = ft_strdup(tmp);
-	else
-		neighb->next = NULL;
-	flag = 1;
+	while (neighb->next != NULL)
+		j++;
+	neighb[j - 1]->next = tmp;
+	neighb[j]->neighbour = tmp;
+	neighb[j]->next = NULL;
 }
 
-void clear_neigbouhrs_list(t_list *neighb)
+void	clear_neigbouhrs_list(t_list *neighb)
 {
 	t_list *tmp;
 
@@ -201,5 +189,40 @@ void clear_neigbouhrs_list(t_list *neighb)
 		tmp = neighb->next;
 		free((void *)neighb);
 		neighb = tmp;
+	}
+}
+
+void algorithm()
+{
+	int value_of_ants;
+	char *num_ant;
+}
+
+
+void	ants_printing(t_room *room, int value_of_ants, char *num_ant)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (value_of_ants > 0)
+	{
+		if (room[i]->is_ant_inside == 1)
+		{
+			write(1, "L", 1);
+			j = 0;
+			while(num_ant[j])
+				write(1, &num_ant[j++], 1);
+			write(1, "-", 1);
+			j = 0;
+			while(room[j]->name)
+				write(1, &name, 1);
+			if (value_of_ants == 1)
+				write(1, "\n", 1);
+			else
+				write(1, " ", 1);
+			value_of_ants--;
+		}
+		i++;
 	}
 }

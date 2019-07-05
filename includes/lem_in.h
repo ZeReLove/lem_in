@@ -6,7 +6,7 @@
 /*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 13:25:07 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/07/03 15:05:40 by mrolfe           ###   ########.fr       */
+/*   Updated: 2019/07/05 15:14:44 by mrolfe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct		s_room //ячейка массива структур комна
 	char			*name;
 	t_list			*neighb;
 	int				status;
+	int				is_ant_inside;
 }					t_room;
 
 typedef struct		s_list // ячейка списка соседей
