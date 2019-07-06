@@ -164,8 +164,8 @@ t_list    *make_neighb_list(t_room *rooms, char *line)
 {
     int i;
     char *tmp;
-	int	j;
     t_list *neighb;
+	t_list *temp;
 
     i = 0;
     while (line[i] != '-')
@@ -173,11 +173,11 @@ t_list    *make_neighb_list(t_room *rooms, char *line)
     i++;
     tmp = ft_strdup(*line);
     neighb = (t_list*)malloc(sizeof(t_list));
-	while (neighb->next != NULL)
-		j++;
-	neighb[j - 1]->next = tmp;
-	neighb[j]->neighbour = tmp;
-	neighb[j]->next = NULL;
+	temp = neighb;
+	while (temp)
+		temp = temp->next;
+	temp->next->neighbour = tmp;
+	temp->next->next = NULL;
 }
 
 void	clear_neigbouhrs_list(t_list *neighb)
@@ -225,4 +225,28 @@ void	ants_printing(t_room *room, int value_of_ants, char *num_ant)
 		}
 		i++;
 	}
+}
+
+int number_of_pathes(t_data *read, t_plist *pointers, t_path *pathes)
+{
+	int num;
+	int sum_p; // длина всех путей
+	int num_p; // количество всех путей
+	t_list *tmp;
+	t_list *tmp2;
+
+	tmp = pointers; // указатель для того, чтобы выяснить, сколько путей
+	tmp2 = pathes; // указатель для суммы всех шагов всех путей
+	while (tmp)
+	{
+		while (tmp2)
+		{
+			tmp2 = tmp2->next;
+			sum_p += 1;
+		}
+		tmp = tmp->next;
+		num_p += 1;
+	}
+	num = (read->amount_of_ants + sum_p - 1) / num_p;
+	return (num);
 }

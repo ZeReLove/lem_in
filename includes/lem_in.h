@@ -6,7 +6,7 @@
 /*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 13:25:07 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/07/05 15:14:44 by mrolfe           ###   ########.fr       */
+/*   Updated: 2019/07/06 16:32:03 by mrolfe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,18 @@ typedef struct	s_reading_data
     t_room			*start_room;
     t_room			*end_room;
 }					t_data;
+
+typedef struct		s_path	
+{
+	t_room			*room;
+	struct s_path	*next;
+}					t_path;
+
+typedef struct 		s_plist
+{
+	t_path			*path;
+	struct s_plist	*next;
+}					t_plist;
 
 void			make_neigb_list(t_room *room, t_room *rooms, char *line);
 
