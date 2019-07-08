@@ -6,7 +6,7 @@
 /*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 13:25:07 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/07/06 16:32:03 by mrolfe           ###   ########.fr       */
+/*   Updated: 2019/07/08 15:50:21 by mrolfe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct		s_room //ячейка массива структур комна
 	t_list			*neighb;
 	int				status;
 	int				is_ant_inside;
+	int 			num_ant;
 }					t_room;
 
 typedef struct		s_list // ячейка списка соседей
@@ -42,6 +43,7 @@ typedef struct		s_list // ячейка списка соседей
 typedef struct	s_reading_data
 {
     int				amount_of_ants;
+	int				ants_in_the_end_room;
     t_room			*start_room;
     t_room			*end_room;
 }					t_data;
@@ -57,6 +59,15 @@ typedef struct 		s_plist
 	t_path			*path;
 	struct s_plist	*next;
 }					t_plist;
+
+typedef struct		s_array
+{
+	int				num_of_steps;
+	int				num_of_pathes;
+}					t_array;
+
+
+
 
 void			make_neigb_list(t_room *room, t_room *rooms, char *line);
 
