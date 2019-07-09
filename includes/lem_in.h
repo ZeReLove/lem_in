@@ -6,7 +6,7 @@
 /*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 13:25:07 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/07/08 15:50:21 by mrolfe           ###   ########.fr       */
+/*   Updated: 2019/07/09 17:43:34 by mrolfe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 # define			
 
 int					room_nb;
-int					flag;
+int					n_ant;
+int					index;
+
 
 typedef struct		s_room //ячейка массива структур комнат
 {
@@ -31,7 +33,6 @@ typedef struct		s_room //ячейка массива структур комна
 	t_list			*neighb;
 	int				status;
 	int				is_ant_inside;
-	int 			num_ant;
 }					t_room;
 
 typedef struct		s_list // ячейка списка соседей
@@ -43,9 +44,9 @@ typedef struct		s_list // ячейка списка соседей
 typedef struct	s_reading_data
 {
     int				amount_of_ants;
-	int				ants_in_the_end_room;
     t_room			*start_room;
     t_room			*end_room;
+	int				ants_in_the_end_room;
 }					t_data;
 
 typedef struct		s_path	
