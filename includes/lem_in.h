@@ -6,7 +6,7 @@
 /*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 13:25:07 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/07/09 17:43:34 by mrolfe           ###   ########.fr       */
+/*   Updated: 2019/07/10 14:46:17 by mrolfe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 int					room_nb;
 int					n_ant;
 int					index;
+int					index2;
+int					index3;
 
 
 typedef struct		s_room //ячейка массива структур комнат
