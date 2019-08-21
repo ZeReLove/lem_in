@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_errors.c                                    :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bconwy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/01 14:44:00 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/14 15:48:13 by mrolfe           ###   ########.fr       */
+/*   Created: 2018/12/23 19:45:12 by bconwy            #+#    #+#             */
+/*   Updated: 2018/12/23 19:45:15 by bconwy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void    malloc_error()//норма
+void	*ft_memalloc(size_t size)
 {
-    printf("malloc error\n");
-    exit(1);
-}
+	char	*mem;
+	size_t	i;
 
-void    map_error()//норма
-{
-    write(1, "ERROR\n", 6);
-    exit(1);
+	i = 0;
+	mem = (char *)malloc(sizeof(mem) * size);
+	if (mem)
+	{
+		while (i < size)
+		{
+			mem[i] = 0;
+			i++;
+		}
+		return ((void *)mem);
+	}
+	else
+		return (NULL);
 }

@@ -1,34 +1,22 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   reading_data2.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/06 14:17:53 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/06 14:18:26 by mrolfe           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "lem_in.h"
 
-static void	check_start_finish(t_room *room1, t_room *room2, t_data *str)
+static void	check_start_finish(t_room *room1, t_room *room2, t_data *str)//норма
 {
 	if (ft_strequ(room1->name, str->start))
 		str->start_room = room1;
-	else if (ft_strequ(room2->name, str->start))
+	else if(ft_strequ(room2->name, str->start))
 		str->start_room = room2;
-	if (ft_strequ(room1->name, str->end))
+	if(ft_strequ(room1->name, str->end))
 		str->end_room = room1;
 	else if (ft_strequ(room2->name, str->end))
 		str->end_room = room2;
 }
 
-static int	partition(t_room *room, int low, int high, t_data *str)
+static int	partition(t_room *room, int low, int high, t_data *str)//норма
 {
-	t_room	pivot;
-	int		i;
-	int		j;
+	t_room pivot;
+	int i;
+	int j;
 
 	i = (low - 1);
 	pivot = room[high];
@@ -48,7 +36,7 @@ static int	partition(t_room *room, int low, int high, t_data *str)
 	return (i + 1);
 }
 
-void		sorting_rooms(t_room *room, int low, int high, t_data *str)
+void 		sorting_rooms(t_room *room, int low, int high, t_data *str) // норма
 {
 	int pi;
 
@@ -60,7 +48,7 @@ void		sorting_rooms(t_room *room, int low, int high, t_data *str)
 	}
 }
 
-t_room		*find_room(char *buff, t_room *room)
+t_room	*find_room(char *buff, t_room *room) //норма
 {
 	int start;
 	int end;
@@ -84,7 +72,7 @@ t_room		*find_room(char *buff, t_room *room)
 	return (NULL);
 }
 
-int			checking_dash(char *line)
+int		checking_dash(char *line) //норма
 {
 	int	i;
 
@@ -96,4 +84,20 @@ int			checking_dash(char *line)
 		i++;
 	}
 	return (0);
+}
+
+void	other_rooms(char *line, t_room *room) //норма
+{
+	int	i;
+
+	i = 0;
+	while (line[i] != ' ')
+		i++;
+	line[i] = '\0';
+	room[room_nb].name = ft_strdup(line);
+	room[room_nb].value = NOT_GIVEN;
+	room[room_nb].status = OPENED;
+	room[room_nb].is_ant_inside = 0;
+	room_nb++;
+	free(line);
 }

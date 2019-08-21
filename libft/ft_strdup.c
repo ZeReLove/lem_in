@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_errors.c                                    :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bconwy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/01 14:44:00 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/14 15:48:13 by mrolfe           ###   ########.fr       */
+/*   Created: 2018/11/28 18:24:57 by bconwy            #+#    #+#             */
+/*   Updated: 2018/11/28 18:25:01 by bconwy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void    malloc_error()//норма
+char	*ft_strdup(const char *src)
 {
-    printf("malloc error\n");
-    exit(1);
-}
+	char	*ret;
+	int		i;
 
-void    map_error()//норма
-{
-    write(1, "ERROR\n", 6);
-    exit(1);
+	i = 0;
+	if (!(ret = (char *)malloc(sizeof(*ret) * ft_strlen(src) + 1)))
+		return (NULL);
+	while (src[i])
+	{
+		ret[i] = src[i];
+		i++;
+	}
+	ret[i] = '\0';
+	return (ret);
 }

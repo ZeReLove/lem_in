@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   algorithm2.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/06 13:01:02 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/06 13:01:46 by mrolfe           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "lem_in.h"
 
-t_plist		*make_path_list(t_plist *prev, t_path *current)
+t_plist		*make_path_list(t_plist *prev, t_path *current) //норма
 {
 	t_plist	*plist;
 
@@ -29,7 +17,7 @@ t_plist		*make_path_list(t_plist *prev, t_path *current)
 	return (plist);
 }
 
-t_path		*make_path(t_path *prev, t_room *current, int index)
+t_path		*make_path(t_path *prev, t_room *current, int index) //норма
 {
 	t_path	*path;
 
@@ -49,14 +37,14 @@ t_path		*make_path(t_path *prev, t_room *current, int index)
 	return (path);
 }
 
-int			check_finish(t_room *finish, t_room *current)
+int			check_finish(t_room *finish, t_room *current) //норма
 {
 	if (ft_strequ(finish->name, current->name))
 		return (1);
 	return (0);
 }
 
-void		clean_values(t_room *arr)
+void		clean_values(t_room *arr) //норма
 {
 	int		i;
 
@@ -65,7 +53,7 @@ void		clean_values(t_room *arr)
 		arr[i++].value = NOT_GIVEN;
 }
 
-t_room		**make_queue(void)
+t_room		**make_queue()//норма
 {
 	t_room	**room;
 	int		i;

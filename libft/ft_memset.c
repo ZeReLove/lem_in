@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_errors.c                                    :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bconwy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/01 14:44:00 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/14 15:48:13 by mrolfe           ###   ########.fr       */
+/*   Created: 2018/11/27 14:42:36 by bconwy            #+#    #+#             */
+/*   Updated: 2018/11/27 14:42:44 by bconwy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void    malloc_error()//норма
+void	*ft_memset(void *b, int c, size_t len)
 {
-    printf("malloc error\n");
-    exit(1);
-}
+	size_t	i;
+	char	*str;
 
-void    map_error()//норма
-{
-    write(1, "ERROR\n", 6);
-    exit(1);
+	str = b;
+	i = 0;
+	while (i < len)
+	{
+		str[i] = c;
+		i++;
+	}
+	return (b);
 }

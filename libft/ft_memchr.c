@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_errors.c                                    :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bconwy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/01 14:44:00 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/14 15:48:13 by mrolfe           ###   ########.fr       */
+/*   Created: 2018/11/28 17:22:09 by bconwy            #+#    #+#             */
+/*   Updated: 2018/11/28 17:22:13 by bconwy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void    malloc_error()//норма
+void	*ft_memchr(const void *arr, int c, size_t n)
 {
-    printf("malloc error\n");
-    exit(1);
-}
+	size_t i;
 
-void    map_error()//норма
-{
-    write(1, "ERROR\n", 6);
-    exit(1);
+	i = 0;
+	while (i < n)
+	{
+		if (((unsigned char *)arr)[i] == (unsigned char)c)
+			return ((void *)(arr + i));
+		i++;
+	}
+	return (NULL);
 }

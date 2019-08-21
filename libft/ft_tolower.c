@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_errors.c                                    :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bconwy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/01 14:44:00 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/14 15:48:13 by mrolfe           ###   ########.fr       */
+/*   Created: 2018/12/02 14:22:13 by bconwy            #+#    #+#             */
+/*   Updated: 2018/12/02 14:22:16 by bconwy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void    malloc_error()//норма
+int	ft_tolower(int c)
 {
-    printf("malloc error\n");
-    exit(1);
-}
-
-void    map_error()//норма
-{
-    write(1, "ERROR\n", 6);
-    exit(1);
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	else
+		return (c);
 }

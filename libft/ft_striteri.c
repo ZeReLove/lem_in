@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_errors.c                                    :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bconwy <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/01 14:44:00 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/14 15:48:13 by mrolfe           ###   ########.fr       */
+/*   Created: 2018/12/23 20:06:14 by bconwy            #+#    #+#             */
+/*   Updated: 2018/12/23 20:06:16 by bconwy           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem_in.h"
+#include "libft.h"
 
-void    malloc_error()//норма
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-    printf("malloc error\n");
-    exit(1);
-}
+	unsigned int i;
 
-void    map_error()//норма
-{
-    write(1, "ERROR\n", 6);
-    exit(1);
+	i = 0;
+	if (s != NULL && f != NULL)
+	{
+		while (*s)
+		{
+			f(i++, s++);
+		}
+	}
 }

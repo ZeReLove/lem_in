@@ -6,7 +6,7 @@
 /*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 13:25:07 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/07 20:05:19 by mrolfe           ###   ########.fr       */
+/*   Updated: 2019/08/21 14:40:24 by mrolfe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 # include "libft.h"
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdio.h> // НЕ ЗАБЫТЬ ВСТАВИТЬ СВОЙ PRINTF!!!!!!!!!!!!!!!!!!!!!!!
 
-# define			MAXV 10000
+# define 			MAXV 7000   /*максимальное количество вершин */
 # define			BLOCKED 0
 # define			DELETED -1
 # define			OPENED 1
@@ -32,8 +33,11 @@ int					index1;
 int					index2;
 int					index3;
 int					i;
+int					index_for_rc;
+int					idx_for_start;
+int					idx_for_end;
 
-typedef struct		s_room
+typedef struct		s_room //ячейка массива структур комнат
 {
 	char			*name;
 	struct s_nlist	*neighb;
@@ -42,7 +46,7 @@ typedef struct		s_room
 	int				is_ant_inside;
 }					t_room;
 
-typedef struct		s_nlist
+typedef struct		s_nlist // ячейка списка соседей
 {
 	t_room			*room;
 	struct s_nlist	*next;
@@ -75,13 +79,6 @@ typedef struct		s_reading_data
 	int				number_of_pathes;
 }					t_data;
 
-typedef struct		s_norm
-{
-	int				i;
-	int				j;
-	int				block;
-}					t_norm;
-
 typedef struct		s_array
 {
 	int				num_of_steps;
@@ -89,15 +86,10 @@ typedef struct		s_array
 }					t_array;
 
 t_plist    			*algorithm(t_room *start, t_room *finish, t_room *arr);
-int					cutting_path(t_room *start, t_room *finish, t_plist *plist,
-						int *index);
+int					cutting_path(t_room *start, t_room *finish, t_plist *plist, int *index);
 int					both_directions(t_plist *plist, t_room *start);
 int					width_search(t_room *start, t_room *finish, t_path **path);
 int					give_values(t_room **start, t_room *finish, int cur_val);
-t_room				**give_values3(t_norm *norm, t_room **start);
-void				give_values2(t_norm *norm, t_room **queue, t_nlist **tmp,
-						int *cur_val);
-int					give_values4(t_room **queue);
 
 t_plist				*make_path_list(t_plist *prev, t_path *current);
 t_path				*make_path(t_path *prev, t_room *current, int index);
@@ -114,15 +106,12 @@ void				unblock_direction(t_plist *plist, t_room *start);
 void				unblock_start(t_room *start);
 void				find_room2(t_path *path, t_room *room);
 int					find_room3(t_path *path, t_room *room);
-void				find_room4(t_nlist	*tmp, t_path *path, t_room *room,
-						int *count);
 void				unblock_rooms(t_plist *plist);
 
 int 				checking_data(t_data *str);
 int     			check_room(char **line);
 int     			check_ants(const int fd, char **line);
-void     			check(char *line, int fd, t_data *str, t_room *room,
-						int *index);
+void     			check(char *line, int fd, t_data *str, t_room *room, int *index);
 
 t_room				*reading_data(t_data *str, char *line, int fd);
 void				read_start(char *line, int fd, t_data *str, t_room *room);
@@ -134,30 +123,23 @@ t_room				*make_struct_arr();
 void    			make_neighb_list(t_room *rooms, char *line, t_room *room);
 
 t_array				*creating_of_array();
-int 				number_of_pathes(t_data *read, t_plist *pointers,
-						t_array *pathes);
-void				comparing_of_values(t_array *pathes, int number_of_steps,
-						int num_p);
-void				comparing_of_values2(t_array *pathes);
+int 				number_of_pathes(t_data *read, t_plist *pointers, t_array *pathes);
+void				comparing_of_values(t_array *pathes, int number_of_steps, int num_p);
 
 void				sorting_rooms(t_room *room, int low, int high, t_data *str);
 t_room				*find_room(char *buff, t_room *room);
 int					checking_dash(char *line);
 void				other_rooms(char *line, t_room *room);
 
-void 				ants_going_through_graph(t_plist *pointers,
-						int num_of_pathes, t_data *read);
-void				moving_ants(int *array_num_ant, t_data *read,
-						int *value_of_ants, t_plist *plist);
+void 				ants_going_through_graph(t_plist *pointers, int num_of_pathes, t_data *read);
+void				moving_ants(int *array_num_ant, t_data *read, int *value_of_ants, t_plist *plist);
 void				ants_inside(t_plist *pointers, int i, t_data *read);
 
-void				print_room(t_plist *tmp, int *ant_val, t_data *read,
-						int *array_num_ant);
-void				ants_printing(t_plist *plist, int *value_of_ants,
-						int *array_num_ant, t_data *read);
+void				print_room(t_plist *tmp, int *ant_val, t_data *read, int *array_num_ant);
+void				ants_printing(t_plist *plist, int *value_of_ants, int *array_num_ant, t_data *read);
 
 void    			malloc_error();
 void    			map_error();
-void				set_neighb(t_room *room);
+void                free_array_num_ant(int *array_num_ant);
 
 #endif

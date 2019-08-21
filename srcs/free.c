@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/06 13:43:53 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/07 19:47:42 by mrolfe           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "lem_in.h"
 
-void		free_pathlist(t_path *path, t_plist *plist)
+void		free_pathlist(t_path *path, t_plist *plist) //норма
 {
 	t_path	*tmp;
 	t_plist	*tmp2;
@@ -24,14 +12,15 @@ void		free_pathlist(t_path *path, t_plist *plist)
 		{
 			tmp = path;
 			path = path->next;
-			free(tmp);
+			//free (tmp);
 		}
 		plist = plist->next;
-		free(tmp2);
+		//free (tmp2);
 	}
+	
 }
 
-void		free_path(t_plist *plist)
+void		free_path(t_plist *plist) //норма
 {
 	t_plist	*tmp;
 	t_path	*tmp2;
@@ -45,22 +34,19 @@ void		free_path(t_plist *plist)
 	{
 		tmp2 = path;
 		path = path->next;
-		free(tmp2);
+		free (tmp2);
 	}
-	free(tmp->next);
+	free (tmp->next);
 	tmp->next = NULL;
 }
 
 static void	free_data(t_data *str)
 {
-	free(str->end_room->name);
-	free(str->start_room->name);
 	free(str->start);
 	free(str->end);
-	free(str->delta);
 }
 
-void		free_neighb_list(t_room *room, t_data *str)
+void		free_neighb_list(t_room *room, t_data *str) //норма
 {
 	int		i;
 	t_nlist	*tmp;
@@ -70,14 +56,14 @@ void		free_neighb_list(t_room *room, t_data *str)
 	while (i < room_nb)
 	{
 		tmp = room[i].neighb;
-		free(room[i++].name);
+		free (room[i++].name);
 		while (tmp)
 		{
 			tmp2 = tmp;
 			tmp = tmp->next;
-			free(tmp2);
+			free (tmp2);
 		}
 	}
-	free(room);
+	free (room);
 	free_data(str);
 }

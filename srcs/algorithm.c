@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   algorithm.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/06 12:06:41 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/06 14:14:36 by mrolfe           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "lem_in.h"
 
-t_plist		*algorithm(t_room *start, t_room *finish, t_room *arr)
+t_plist    	*algorithm(t_room *start, t_room *finish, t_room *arr) //норма
 {
 	t_path	*path;
 	t_plist	*plist;
@@ -39,12 +27,11 @@ t_plist		*algorithm(t_room *start, t_room *finish, t_room *arr)
 	return (first);
 }
 
-int			cutting_path(t_room *start, t_room *finish, t_plist *plist,
-							int *index)
+int			cutting_path(t_room *start, t_room *finish, t_plist *plist, int *index) //норма
 {
 	t_plist	*tmp;
 	t_path	*new;
-
+	
 	new = NULL;
 	tmp = plist;
 	if (plist)
@@ -69,7 +56,7 @@ int			cutting_path(t_room *start, t_room *finish, t_plist *plist,
 	return (1);
 }
 
-int			both_directions(t_plist *plist, t_room *start)
+int			both_directions(t_plist *plist, t_room *start) //норма
 {
 	t_path	*tmp;
 	t_room	*tmp2;
@@ -90,7 +77,7 @@ int			both_directions(t_plist *plist, t_room *start)
 	return (0);
 }
 
-int			width_search(t_room *start, t_room *finish, t_path **path)
+int			width_search(t_room *start, t_room *finish, t_path **path) //норма
 {
 	int		val;
 	t_nlist	*current;
@@ -110,4 +97,46 @@ int			width_search(t_room *start, t_room *finish, t_path **path)
 		val--;
 	}
 	return (1);
+}
+
+int			give_values(t_room **start, t_room *finish, int cur_val) //не норма (+12 строк)
+{
+	t_room	**queue; // спросить у папы
+	int		i;
+	int		j;
+	int		block;
+	t_nlist	*tmp;
+
+	i = 0;
+	j = 0;
+	block = 1;
+	queue = make_queue();
+	tmp = (*start)->neighb;
+	queue[i++] = *start;
+	while (queue[j] != NULL)
+	{
+		queue[j++] = NULL;
+		while (tmp)
+		{
+			if (tmp->room->value == NOT_GIVEN && tmp->room->status == OPENED && tmp->status == OPENED)
+			{
+				queue[i] = tmp->room;
+				queue[i++]->value = cur_val;
+				if (check_finish(finish, queue[i - 1]))
+				{
+					free (queue);
+					return (1);
+				}
+			}
+			tmp = tmp->next;
+		}
+		if (j == block || block == 1)
+			cur_val++;
+		if (j == block)
+			block = i;
+		if (queue[j])
+			tmp = queue[j]->neighb;
+	}
+	free (queue);
+	return (0);
 }
