@@ -56,7 +56,7 @@ t_room	*find_room(char *buff, t_room *room) //норма
 	int	res;
 
 	start = 0;
-	end = room_nb;
+	end = room_nb - 1; //changed
 	while (start <= end)
 	{
 		middle = (start + end) / 2;

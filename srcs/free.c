@@ -12,13 +12,32 @@ void		free_pathlist(t_path *path, t_plist *plist) //норма
 		{
 			tmp = path;
 			path = path->next;
-			//free (tmp);
+			free (tmp);
 		}
 		plist = plist->next;
-		//free (tmp2);
+		free (tmp2);
 	}
-	
+	plist = NULL;
 }
+
+// void        free_pathlist(t_path *path, t_plist *plist) //норма
+// {
+//    t_path    *tmp;
+//    t_plist    *tmp2;
+
+//    while (plist)
+//    {
+//        tmp2 = plist;
+//        while (path)
+//        {
+// 			tmp = path->next;
+//             free (path);
+// 			path = tmp;
+//        }
+//        plist = plist->next;
+//        free (tmp2);
+//    }
+// }
 
 void		free_path(t_plist *plist) //норма
 {

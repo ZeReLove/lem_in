@@ -27,8 +27,12 @@ void		read_end(char *line, int fd, t_data *str, t_room *room)
 	//printf("%s\n", line);
 	free(line);
 	get_next_line(fd, &line);
-	if (line[0] && ((line[0] == '#' && line[1] == '#') || (line[0] == '#' && line[1] != '#')))
-    	get_next_line(fd, &line);
+	//if ((line[0] == '#' && line[1] != '#'))
+	if (line)
+	{
+		if ((line[0] == '#' && line[1] == '#') || (line[0] == '#' && line[1] != '#')) // ?????????????????
+    		get_next_line(fd, &line);
+	}
 	check_room(&line);
 	//printf("%s\n", line);
 	make_end(str, room, line);
@@ -80,6 +84,7 @@ void		make_start(t_data *str, t_room *room, char *line) //норма
 		i++;
 	line[i] = '\0';
 	room[room_nb].name = ft_strdup(line);
+	str->start = NULL;
 	str->start = ft_strdup(line);
 	room[room_nb].value = NOT_GIVEN;
 	room[room_nb].neighb = NULL;
@@ -101,6 +106,7 @@ void		make_end(t_data *str, t_room *room, char *line) //норма
 	line[i] = '\0';
 	if (!(room[room_nb].name = ft_strdup(line)))
 		malloc_error();
+	str->end = NULL;
 	str->end = ft_strdup(line);
 	room[room_nb].value = NOT_GIVEN;
 	room[room_nb].status = OPENED;

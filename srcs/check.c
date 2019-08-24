@@ -6,7 +6,7 @@
 /*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 14:44:00 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/21 16:02:01 by mrolfe           ###   ########.fr       */
+/*   Updated: 2019/08/24 15:04:13 by mrolfe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,25 @@
 
 int     checking_data(t_data *str) //нет проверки на на дубликаты. Надо ли?
 {
-    if (str->end_room->name && str->start_room->name)
+    if (str->start && str->end)
     {
-        if (ft_strequ(str->end_room->name, str->start_room->name))
+        if (ft_strequ(str->start, str->end))
             map_error();
     }
-    if (str->amount_of_ants > 0 && str->start_room && str->end_room && room_nb > 2 && index_for_rc == 1)
+    if (str->amount_of_ants > 0 && str->start && str->end &&
+        room_nb > 2 && index_for_rc == 1)
         return (1);
+    // if (!checing_duplicats())
+    //     map_error();
     else
         map_error();
     return (0);
 }
+
+// void    checking_duplicates(t_room *room)
+// {
+    
+// }
 
 void     check(char *line, int fd, t_data *str, t_room *room, int *index) //норма
 {
@@ -48,6 +56,8 @@ void     check(char *line, int fd, t_data *str, t_room *room, int *index) //но
     }
     else if (checking_dash(line))
     {
+        if (!str->end_room || !str->start_room) // made for pipes_before_room (why doesn't work?)
+            map_error();
         printf("%s\n", line);
         if (*index == 0)
             sorting_rooms(room, 0, room_nb - 1, str);
@@ -72,6 +82,8 @@ int     check_room(char **line)
     i = 1;
     j = 0;
     count = 0;
+    if (*line == NULL)
+        map_error();
     if (line[0][0] == 'L' || line[0][0] == '#')
         map_error();
     while (line[0][i] && line[0][i] != ' ')

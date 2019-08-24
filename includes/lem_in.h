@@ -6,7 +6,7 @@
 /*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/29 13:25:07 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/21 14:40:24 by mrolfe           ###   ########.fr       */
+/*   Updated: 2019/08/24 16:02:03 by mrolfe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int					i;
 int					index_for_rc;
 int					idx_for_start;
 int					idx_for_end;
+int					idx_for_make_plist;
 
 typedef struct		s_room //ячейка массива структур комнат
 {
@@ -108,7 +109,7 @@ void				find_room2(t_path *path, t_room *room);
 int					find_room3(t_path *path, t_room *room);
 void				unblock_rooms(t_plist *plist);
 
-int 				checking_data(t_data *str);
+int     			checking_data(t_data *str);
 int     			check_room(char **line);
 int     			check_ants(const int fd, char **line);
 void     			check(char *line, int fd, t_data *str, t_room *room, int *index);
