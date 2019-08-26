@@ -11,11 +11,11 @@ t_plist    	*algorithm(t_room *start, t_room *finish, t_room *arr) //норма
 	index = 0;
 	path = NULL;
 	first = NULL;
-	while (cutting_path(start, finish, plist, &index))
+	while (cutting_path(start, finish, first, &index))
 	{
-		plist = NULL;
+		//plist = NULL;
 		while (width_search(start, finish, &path))
-		{
+		{ 
 			clean_values(arr);
 			plist = make_path_list(plist, path);
 			//idx_for_make_plist = 1;
@@ -29,14 +29,14 @@ t_plist    	*algorithm(t_room *start, t_room *finish, t_room *arr) //норма
 	return (first);
 }
 
-int			cutting_path(t_room *start, t_room *finish, t_plist *plist, int *index) //норма
+int			cutting_path(t_room *start, t_room *finish, t_plist *first, int *index) //норма
 {
 	t_plist	*tmp;
 	t_path	*new;
 	
 	new = NULL;
-	tmp = plist;
-	if (plist != NULL)
+	tmp = first;
+	if (first != NULL)
 	{
 		//idx_for_make_plist = 0;
 		unblock_rooms(tmp);
@@ -48,13 +48,13 @@ int			cutting_path(t_room *start, t_room *finish, t_plist *plist, int *index) //
 		make_path_list(tmp, new);
 		if (!both_directions(tmp->next, start))
 		{
-			free_path(plist);
+			free_path(first);
 			return (0);
 		}
-		unblock_direction(plist, start);
-		free_pathlist((plist)->path, plist);
+		unblock_direction(first, start);
+		free_pathlist((first)->path, first);
 		*index = 0;
-		plist = NULL;
+		first = NULL;
 	}
 	return (1);
 }

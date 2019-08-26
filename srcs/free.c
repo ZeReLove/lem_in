@@ -8,6 +8,7 @@ void		free_pathlist(t_path *path, t_plist *plist) //норма
 	while (plist)
 	{
 		tmp2 = plist;
+		path = tmp2->path;
 		while (path)
 		{
 			tmp = path;

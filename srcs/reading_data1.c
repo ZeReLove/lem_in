@@ -11,32 +11,40 @@ static void set_neighb(t_room *room)//норма
 
 void		read_start(char *line, int fd, t_data *str, t_room *room)
 {
-	//printf("%s\n", line);
+	printf("%s\n", line);
 	free(line);
 	get_next_line(fd, &line);
 	if ((line[0] == '#' && line[1] == '#') || (line[0] == '#' && line[1] != '#'))
-        get_next_line(fd, &line);
+	{
+		free(line);
+		get_next_line(fd, &line);
+	}
 	check_room(&line);
-	//printf("%s\n", line);
+	printf("%s\n", line);
 	make_start(str, room, line);
 	idx_for_start = 1;
+	//free(line);
 }
 
 void		read_end(char *line, int fd, t_data *str, t_room *room)
 {
-	//printf("%s\n", line);
+	printf("%s\n", line);
 	free(line);
 	get_next_line(fd, &line);
 	//if ((line[0] == '#' && line[1] != '#'))
 	if (line)
 	{
-		if ((line[0] == '#' && line[1] == '#') || (line[0] == '#' && line[1] != '#')) // ?????????????????
-    		get_next_line(fd, &line);
+		if ((line[0] == '#' && line[1] == '#') || (line[0] == '#' && line[1] != '#'))// ?????????????????
+		{
+			free(line);
+			get_next_line(fd, &line);
+		}
 	}
 	check_room(&line);
-	//printf("%s\n", line);
+	printf("%s\n", line);
 	make_end(str, room, line);
 	idx_for_end = 1;
+	//free(line);
 }
 
 t_room		*reading_data(t_data *str, char *line, int fd)//норма

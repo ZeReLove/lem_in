@@ -6,7 +6,7 @@
 /*   By: mrolfe <mrolfe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 14:44:00 by mrolfe            #+#    #+#             */
-/*   Updated: 2019/08/24 15:04:13 by mrolfe           ###   ########.fr       */
+/*   Updated: 2019/08/26 18:51:20 by mrolfe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void     check(char *line, int fd, t_data *str, t_room *room, int *index) //но
         else if (ft_strequ(line, "##end") && idx_for_end == 0)
             read_end(line, fd, str, room);
         else
+        {
+            free(line);
             return ;
+        }
     }
     else if (line[0] == '#' && line[1] != '#')
     {
@@ -108,20 +111,19 @@ int     check_ants(const int fd, char **line)
     i = 0;
     if (!get_next_line(fd, line))
         map_error();
+    printf("%s\n", *line);
     if ((line[0][0] == '#' && line[0][1] == '#') || (line[0][0] == '#' && line[0][1] != '#'))
     {
         if (ft_strequ(*line, "##start") || ft_strequ(*line, "##end"))
             map_error();
         else
-        //free(*line);
             get_next_line(fd, line);
     }
-        
     while (line[0][i])
     {
         if (!(line[0][i] >= '0' && line[0][i] <= '9'))
             map_error();
         i++;
-    }
+    }   
     return (1);
 }
